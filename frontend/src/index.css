@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-family: 'Inter', sans-serif;
+  
+  /* Fixed colors */
+  --primary-color: #4a90e2;
+  --primary-hover: #357abd;
+  --background-color: #f5f5f5;
+  --card-background: #ffffff;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+input {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--card-background);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Status colors */
+.success { color: var(--success-color); }
+.warning { color: var(--warning-color); }
+.error { color: var(--error-color); }
+
+/* Animation */
+@keyframes twinkle {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.animate-twinkle {
+  animation: twinkle 1.5s infinite;
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  
+  body {
+    @apply min-h-screen font-sans;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors inline-flex items-center;
+  }
+  
+  .btn-primary {
+    @apply btn bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-gray-700 border border-gray-200 hover:bg-gray-50;
+  }
+
+  .input-field {
+    @apply w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-sm p-6 border border-gray-200;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+  }
+
+  .nav-link {
+    @apply px-3 py-2 rounded-md text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply bg-blue-50 text-blue-700;
+  }
+
+  .nav-link-inactive {
+    @apply text-gray-600 hover:bg-gray-50 hover:text-blue-600;
+  }
+
+  .backdrop-blur-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Animated Background Effects */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(31, 41, 55, 0.4) 0%, rgba(31, 41, 55, 0.2) 100%);
+  background-size: 200% 200%;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.nebula {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(45deg, 
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(67, 56, 202, 0.1) 50%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  filter: blur(100px);
+  animation: moveNebula 20s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes moveNebula {
+  0% {
+    transform: translate(-5%, -5%) rotate(0deg);
+  }
+  50% {
+    transform: translate(5%, 5%) rotate(180deg);
+  }
+  100% {
+    transform: translate(-5%, -5%) rotate(360deg);
+  }
+}
+
+/* Enhanced Stars Animation */
+.stars::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(2px 2px at 40px 60px, #fff, rgba(0,0,0,0)),
+                    radial-gradient(2px 2px at 20px 50px, #fff, rgba(0,0,0,0)),
+                    radial-gradient(2px 2px at 30px 100px, #fff, rgba(0,0,0,0)),
+                    radial-gradient(2px 2px at 40px 60px, #fff, rgba(0,0,0,0)),
+                    radial-gradient(2px 2px at 110px 90px, #fff, rgba(0,0,0,0)),
+                    radial-gradient(2px 2px at 190px 150px, #fff, rgba(0,0,0,0));
+  background-size: 200px 200px;
+  animation: stars 100s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes stars {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shooting Stars */
+.shooting-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shooting-stars::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.1),
+              0 0 0 8px rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: shooting-star 6s linear infinite;
+}
+
+.shooting-stars::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 1px;
+  transform-origin: left;
+  background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
+  animation: shooting-star-tail 6s linear infinite;
+}
+
+@keyframes shooting-star {
+  0% {
+    transform: translate(0, -100px) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(400px, 400px) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(400px, 400px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shooting-star-tail {
+  0% {
+    transform: translate(0, -100px) rotate(0deg);
+    opacity: 0.3;
+  }
+  20% {
+    transform: translate(400px, 400px) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(400px, 400px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Enhanced Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateY(20px) scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 7s ease-in-out infinite;
+}
+
+/* Enhanced Gradient Animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(10deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 4s linear infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500;
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20;
+  }
+
+/* Button Hover Effects */
+.button-hover {
+  @apply transform transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg;
+}
+
+/* Animation for stars */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s infinite;
+}
+
+/* Input styles */
+input, select, textarea {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  }
+
+/* Button styles */
+  button {
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  }
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
